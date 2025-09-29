@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>CAPTCHA</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; margin-top: 50px; }
+    .box { display: inline-block; border: 1px solid #ccc; padding: 20px; }
+    button { margin-top: 20px; padding: 10px 20px; font-size: 16px; }
+  </style>
+  <script>
+    function passCaptcha() {
+      window.location.href = "page1_3.html";
+    }
+  </script>
+</head>
+<body>
+  <div class="box">
+    <p><strong>ロボットではありませんか？</strong></p>
+    <input type="checkbox" id="check"> <label for="check">私はロボットではありません</label>
+    <br>
+    <button onclick="if(document.getElementById('check').checked){ passCaptcha(); } else { alert('チェックしてください！'); }">
+      送信
+    </button>
+  </div>
+</body>
+</html>

@@ -2,11 +2,105 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>ページ1</title>
-  <link rel="stylesheet" href="../assets/style.css">
+  <title>タブ切り替えサンプル</title>
+  <style>
+    /* タブボタン */
+    .tab-buttons {
+      display: flex;
+      border-bottom: 2px solid #ccc;
+    }
+    .tab-buttons button {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-bottom: 2px solid transparent;
+      background: #f5f5f5;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .tab-buttons button.active {
+      border-bottom: 2px solid #007bff;
+      font-weight: bold;
+      background: #fff;
+    }
+
+    /* タブの中身 */
+    .tab-content {
+      display: none;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-top: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    /* リンクのスタイル */
+    .tab-content a {
+      display: block;
+      margin-bottom: 5px;
+      color: #007bff;
+      text-decoration: none;
+    }
+    .tab-content a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-  <h1>これはページ1です</h1>
-  <p><a href="../index.html">← メニューに戻る</a></p>
+  <h1>タブ切り替えのUI</h1>
+
+  <!-- タブボタン -->
+  <div class="tab-buttons">
+    <button class="active" data-tab="tab1">タブ1</button>
+    <button data-tab="tab2">タブ2</button>
+    <button data-tab="tab3">タブ3</button>
+  </div>
+
+  <!-- タブコンテンツ -->
+  <div id="tab1" class="tab-content active">
+    <p>これはタブ1の内容です。</p>
+  </div>
+  <div id="tab2" class="tab-content">
+    <p>これはタブ2の内容です。</p>
+  </div>
+  <div id="tab3" class="tab-content">
+    <p>これはタブ3の内容です。リンクはこちら：</p>
+    <a href="../index.html" target="_blank">リンク1</a>
+    <a href="../index.html" target="_blank">リンク2</a>
+    <a href="page1_3.html" target="_blank" onclick="handleLinkClick(event)">リンク3</a>
+  </div>
+
+  <script>
+    // タブ切り替え処理
+    const buttons = document.querySelectorAll(".tab-buttons button");
+    const contents = document.querySelectorAll(".tab-content");
+
+    buttons.forEach(button => {
+      button.addEventListener("click", () => {
+        // ボタンのactive切り替え
+        buttons.forEach(btn => btn.classList.remove("active"));
+        button.classList.add("active");
+
+        // コンテンツの切り替え
+        contents.forEach(content => {
+          content.classList.remove("active");
+        });
+        document.getElementById(button.dataset.tab).classList.add("active");
+      });
+    });
+    function handleLinkClick(event) {
+      event.preventDefault(); // デフォルトのリンク遷移を止める
+
+      // 50%の確率でCAPTCHAページ or 遷移先ページ
+      const rand = Math.random();
+      const url = rand < 0.5 ? "captcha.html" : "page1_3.html";
+
+      // 新しいタブで開き、自動フォーカス
+      const newTab = window.open(url, "_blank");
+      if (newTab) {
+        newTab.focus();
+      }
+    }
+  </script>
 </body>
 </html>

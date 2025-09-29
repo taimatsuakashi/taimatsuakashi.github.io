@@ -2,11 +2,73 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>ページ1</title>
-  <link rel="stylesheet" href="../assets/style.css">
+  <title>プルダウンでコメント切り替え＋リンク</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    select, textarea { width: 300px; margin-top: 10px; }
+    textarea { height: 100px; display: block; }
+    #links a {
+      display: block;
+      margin: 5px 0;
+      color: blue;
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-  <h1>これはページ3です</h1>
-  <p><a href="../index.html">← メニューに戻る</a></p>
+  <h2>プルダウンで選択 → コメントとリンクを表示</h2>
+
+  <label for="options">選択してください：</label><br>
+  <select id="options">
+    <option value="">-- 選択してください --</option>
+    <option value="A">パターンA</option>
+    <option value="B">パターンB</option>
+    <option value="C">パターンC</option>
+  </select>
+
+  <br><br>
+  <label for="comment">コメント：</label><br>
+  <textarea id="comment" readonly></textarea>
+
+  <!-- リンクを表示する領域 -->
+  <div id="links"></div>
+
+  <script>
+    const options = document.getElementById("options");
+    const commentBox = document.getElementById("comment");
+    const linksDiv = document.getElementById("links");
+
+    const comments = {
+      "A": "これはパターンAを選んだ時のコメントです。",
+      "B": "パターンBを選んだので、こちらのコメントが表示されます。",
+      "C": "パターンCの場合のコメントはこちらです。"
+    };
+
+    const links = {
+      "C": [
+        { text: "page3_1", url: "page3_1.html" },
+        { text: "page3_2", url: "page3_2.html" }
+      ]
+    };
+
+    options.addEventListener("change", () => {
+      const value = options.value;
+
+      // コメント更新
+      commentBox.value = comments[value] || "";
+
+      // リンク更新
+      linksDiv.innerHTML = ""; // 一旦クリア
+      if (links[value]) {
+        links[value].forEach(link => {
+          const a = document.createElement("a");
+          a.href = link.url;
+          a.textContent = link.text;
+          a.target = "_blank"; // 新しいタブで開く
+          linksDiv.appendChild(a);
+        });
+      }
+    });
+  </script>
 </body>
 </html>

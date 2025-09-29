@@ -4,9 +4,23 @@
   <meta charset="UTF-8">
   <title>ページ1</title>
   <link rel="stylesheet" href="../assets/style.css">
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Noto Sans JP",sans-serif;margin:24px}
+    h1{font-size:1.2rem}
+    a.btn{display:inline-block;padding:8px 12px;margin:6px 0;border-radius:6px;text-decoration:none;border:1px solid #333}
+  </style>
 </head>
 <body>
-  <h1>これはページ2です</h1>
-  <p><a href="../index.html">← メニューに戻る</a></p>
+  <div class="grid">
+    <a href="page2_1.html" id="openWindow" class="btn">広告が出るかも</a>
+  <p>補足：ポップアップブロッカーが有効だと新しいウィンドウがブロックされることがあります。</p>
+  </div>
+
+<script>
+  document.getElementById('openWindow').addEventListener('click', function(e){
+  e.preventDefault();
+  window.open('about:blank','popupWindow','width=500,height=400,menubar=no,toolbar=no');
+});
+</script>
 </body>
 </html>
