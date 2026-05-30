@@ -1,8 +1,115 @@
-body {
-  font-family: sans-serif;
-  text-align: center;
-  padding: 50px;
+:root {
+  --bg: #f6f7fb;
+  --text: #1f2937;
+  --muted: #4b5563;
+  --panel: #ffffff;
+  --line: #d6d9e1;
+  --primary: #0f766e;
+  --primary-hover: #115e59;
 }
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(circle at 15% 20%, #e4f4f2 0%, var(--bg) 45%);
+  color: var(--text);
+  font-family: "BIZ UDPGothic", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 40px 20px 56px;
+}
+
+h1 {
+  margin: 0 0 10px;
+  font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+}
+
+h2 {
+  margin-top: 0;
+}
+
+.lead {
+  margin: 0 0 24px;
+  color: var(--muted);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.card-link {
+  display: block;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.card-link:hover {
+  transform: translateY(-2px);
+  border-color: #9ecac5;
+}
+
+.card-link h2 {
+  margin-bottom: 6px;
+  font-size: 1.1rem;
+}
+
+.card-link p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px;
+  margin: 16px 0 22px;
+}
+
+.link-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.link-list a,
+.button {
+  display: inline-block;
+  text-decoration: none;
+  color: #ffffff;
+  background: var(--primary);
+  border-radius: 10px;
+  padding: 8px 12px;
+}
+
+.link-list a:hover,
+.button:hover {
+  background: var(--primary-hover);
+}
+
+.button.secondary {
+  background: #334155;
+}
+
+.button.secondary:hover {
+  background: #1f2937;
+}
+
+/* 既存サンプルの .grid を壊さないため残置 */
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -10,18 +117,20 @@ body {
   max-width: 400px;
   margin: 0 auto;
 }
+
 .grid a {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 80px;
-  background: #4CAF50;
+  min-height: 80px;
+  background: #4caf50;
   color: white;
   font-size: 18px;
   text-decoration: none;
   border-radius: 12px;
   transition: 0.3s;
 }
+
 .grid a:hover {
   background: #45a049;
 }
